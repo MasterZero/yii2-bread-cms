@@ -4,11 +4,41 @@ namespace backend\modules\page\controllers;
 use Yii;
 //use \common\models\Page;
 use \yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 class PageController extends \yii\web\Controller
 {
 
 	public $defaultAction = 'list';
+
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //'actions' => ['login', 'error'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        //'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     public function actionList( $show_removed = false )
     {
@@ -30,12 +60,23 @@ class PageController extends \yii\web\Controller
     }
 
 
+    public function beforeAction($action)
+    {
+        if(!parent::beforeAction($action))
+            return false;
+
+
+        $this->view->title = $this->module->name;
+        return true;
+    }
+
+
 
     public function modelName()
     {
     	$controller_name = $this->id;
 
 
-    	return '\\common\\models\\'. ucfirst($controller_name);
+    	return '\\common\\modules\\'.$controller_name.'\\models\\'. ucfirst($controller_name);
     }
 }

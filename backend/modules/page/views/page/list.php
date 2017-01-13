@@ -4,10 +4,12 @@ use yii\widgets\Menu;
 
 
 $menu_items = ($show_removed) ?
-			[[
+	[
+		[
 	        	'label' => 'Назад',
 	        	'url' => ['list']
-	    ]] : 
+	    ]
+	] : // full menu
 	[
 		[
 	        	'label' => 'Добавить',
@@ -28,7 +30,7 @@ $menu_items = ($show_removed) ?
 
 
 <?= Menu::widget([
-    'items' => $menu_items/*\Yii::$app->controller->module->menuItems*/,
+    'items' => $menu_items,
     ]);
 
 
