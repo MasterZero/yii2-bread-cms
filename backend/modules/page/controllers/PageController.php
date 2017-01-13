@@ -6,6 +6,7 @@ use Yii;
 use \yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\db\Expression;
 
 class PageController extends \yii\web\Controller
 {
@@ -44,7 +45,7 @@ class PageController extends \yii\web\Controller
     {
 
         return $this->render('list', [
-        	'dataProvider' => $this->modelName()::search(),
+        	'dataProvider' => $this->modelName()::search( $show_removed ),
         	'show_removed' => $show_removed ]);
     }
 
@@ -53,10 +54,66 @@ class PageController extends \yii\web\Controller
     {
 
     	$modelName = $this->modelName();
-    	$model = new $modelName;
+
+        if(isset($id))
+            $model = $modelName::findOne($id);
+
+        if(!isset($id))
+    	   $model = new $modelName;
+
+        if ($model->load(Yii::$app->request->post()))
+        {
+
+            if($model->isNewRecord)
+            {
+                $model->created_at = new Expression('NOW()');
+            }
+
+            $model->updated_at = new Expression('NOW()');
+
+            if($model->save())
+                return $this->redirect(['list']);
+        }
 
         return $this->render('update', [
-        	'model' => $model]);
+            'model' => $model]);
+
+    }
+
+    public function actionHide($id)
+    {
+        $modelName = $this->modelName();
+
+        $model = $modelName::findOne($id);
+
+        if(!isset($model))
+            throw new NotFoundHttpException;
+
+        $model->removed ^= true;
+
+        if(!$model->save())
+            throw new \yii\db\Exception;
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+
+    public function actionDelete($id)
+    {
+        $modelName = $this->modelName();
+
+        $model = $modelName::findOne($id);
+
+        if(!isset($model))
+            throw new NotFoundHttpException;
+
+        $model->deleted ^= true;
+
+        if(!$model->save())
+            throw new \yii\db\Exception;
+
+        return $this->redirect(Yii::$app->request->referrer/*['list']*/);
+        //return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
     }
 
 

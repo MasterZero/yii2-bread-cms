@@ -2,13 +2,12 @@
 
 //use yii\db\Migration;
 use console\components\Migration;
-use common\models\Page;
+use common\modules\page\models\Page;
 
-class m170113_102135_page extends Migration
+class m170113_154824_modify_page extends Migration
 {
     public function up()
     {
-
         $this->dropTable(Page::tableName());
 
 
@@ -27,7 +26,7 @@ class m170113_102135_page extends Migration
 
     public function down()
     {
-        echo "m170113_102135_page cannot be reverted.\n";
+        echo "m170113_154824_modify_page cannot be reverted.\n";
 
         return false;
     }

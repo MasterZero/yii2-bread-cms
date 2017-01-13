@@ -32,10 +32,15 @@ class Page extends \yii\db\ActiveRecord
 
 
 
-    public static function search()
+    public static function search( $show_removed = null)
     {
 
     	$query = self::find();
+
+        if (isset($show_removed) && $show_removed)
+            $query = self::find()->where(['deleted' => true]);
+        else
+            $query = self::find()->where(['deleted' => false]);
 
 
 
