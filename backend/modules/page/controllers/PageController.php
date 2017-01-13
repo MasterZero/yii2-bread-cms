@@ -2,7 +2,7 @@
 namespace backend\modules\page\controllers;
 
 use Yii;
-use backend\modules\page\models\Page;
+use \common\models\Page;
 use \yii\web\NotFoundHttpException;
 
 class PageController extends \yii\web\Controller
@@ -11,6 +11,7 @@ class PageController extends \yii\web\Controller
     {
 
 
-        return $this->render('list');
+        return $this->render('list', [
+        	'dataProvider' => Page::search() ]);
     }
 }

@@ -4,11 +4,34 @@ namespace backend\modules\page;
 
 class Module extends \yii\base\Module
 {
+
+
+	public $menuItems;
+
     public function init()
     {
         parent::init();
 
-        //$this->params['foo'] = 'bar';
+        $this->menuItems =  [
+	        [
+	        	'label' => 'Home',
+	        	'url' => ['site/index']
+	        ],
+	        [
+	        	'label' => 'Products',
+	        	'url' => ['product/index'],
+	        	'items' =>
+	        	[
+	            	['label' => 'New Arrivals', 'url' => ['product/index', 'tag' => 'new']],
+	            	['label' => 'Most Popular', 'url' => ['product/index', 'tag' => 'popular']],
+	        	]
+	        ],
+	        [
+	        	'label' => 'Login',
+	        	'url' => ['site/login'],
+	        	'visible' => \Yii::$app->user->isGuest,
+	        ],
+		];
         // ... остальной инициализирующий код ...
     }
 }

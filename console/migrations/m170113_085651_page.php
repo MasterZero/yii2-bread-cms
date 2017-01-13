@@ -2,17 +2,23 @@
 
 use yii\db\Migration;
 
-class m161122_034332_page extends Migration
+class m170113_085651_page extends Migration
 {
     public function up()
     {
+
+
+        $this->createTable('page', [
+            'id' => $this->primaryKey()->unsigned(),
+            'name' => $this->string(100)->notNull(),
+            'content' => $this->text(),
+        ]);
 
     }
 
     public function down()
     {
-        echo "m161122_034332_page cannot be reverted.\n";
-
+        echo "m170113_085651_page cannot be reverted.\n";
 
         return false;
     }
