@@ -12,6 +12,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'name' => 'Bread CMS',
     'modules' => [
         'page' => [
             'class' => 'backend\modules\page\Module',
@@ -43,7 +44,6 @@ return [
             ],
         ],
         /*'errorHandler' => [
-            
         ],*/
         'errorHandler' => [
             'maxSourceLines' => 20,
