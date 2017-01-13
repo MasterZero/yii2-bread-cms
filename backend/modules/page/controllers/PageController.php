@@ -7,6 +7,9 @@ use \yii\web\NotFoundHttpException;
 
 class PageController extends \yii\web\Controller
 {
+
+	public $defaultAction = 'list';
+
     public function actionList( $show_removed = false )
     {
     	var_dump($show_removed);

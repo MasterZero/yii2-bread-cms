@@ -35,11 +35,17 @@ $menu_items = ($show_removed) ?
 ?>
 
 
+<h1><?= Yii::$app->controller->module->name ?></h1>
+
+
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
         'id',
         'name',
+        'url',
+        'created_at',
+        'updated_at',
         /*'created_at:datetime',*/
         // ...
     ],

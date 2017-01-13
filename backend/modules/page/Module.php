@@ -6,13 +6,15 @@ class Module extends \yii\base\Module
 {
 
 	public $menuItems;
+	public $name;
+	public $defaultRoute = 'page';
 
     public function init()
     {
         parent::init();
 
-        $this->menuItems =  [
-	        /*[
+        /*$this->menuItems =  [
+	        [
 	        	'label' => 'Новая страница',
 	        	'url' => ['update']
 	        ],
@@ -29,8 +31,8 @@ class Module extends \yii\base\Module
 	        	'label' => 'Login',
 	        	'url' => ['site/login'],
 	        	'visible' => \Yii::$app->user->isGuest,
-	        ],*/
-		];
+	        ],
+		];*/
         // ... остальной инициализирующий код ...
     }
 }
