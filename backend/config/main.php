@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'page' => [
+            'class' => 'backend\modules\page\Module',
+            // ... другие настройки модуля ...
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -34,7 +39,11 @@ return [
                 ],
             ],
         ],
+        /*'errorHandler' => [
+            
+        ],*/
         'errorHandler' => [
+            'maxSourceLines' => 20,
             'errorAction' => 'site/error',
         ],
         /*
