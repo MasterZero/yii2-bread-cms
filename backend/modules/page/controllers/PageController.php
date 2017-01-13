@@ -7,11 +7,12 @@ use \yii\web\NotFoundHttpException;
 
 class PageController extends \yii\web\Controller
 {
-    public function actionList()
+    public function actionList( $show_removed = false )
     {
-
+    	var_dump($show_removed);
 
         return $this->render('list', [
-        	'dataProvider' => Page::search() ]);
+        	'dataProvider' => Page::search(),
+        	'show_removed' => $show_removed ]);
     }
 }

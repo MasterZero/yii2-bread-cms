@@ -3,6 +3,24 @@ use yii\grid\GridView;
 use yii\widgets\Menu;
 
 
+$menu_items = ($show_removed) ?
+			[[
+	        	'label' => 'Назад',
+	        	'url' => ['list']
+	    ]] : 
+	[
+		[
+	        	'label' => 'Добавить',
+	        	'url' => ['update']
+	    ],
+	    [
+	        	'label' => 'Корзина',
+	        	'url' => ['list', 'show_removed' => true ]
+	    ],
+	];
+
+
+
 ?>
 
 
@@ -10,7 +28,7 @@ use yii\widgets\Menu;
 
 
 <?= Menu::widget([
-    'items' => \Yii::$app->controller->module->menuItems,
+    'items' => $menu_items/*\Yii::$app->controller->module->menuItems*/,
     ]);
 
 

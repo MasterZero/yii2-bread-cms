@@ -5,7 +5,6 @@ namespace backend\modules\page;
 class Module extends \yii\base\Module
 {
 
-
 	public $menuItems;
 
     public function init()
@@ -13,12 +12,12 @@ class Module extends \yii\base\Module
         parent::init();
 
         $this->menuItems =  [
-	        [
-	        	'label' => 'Home',
-	        	'url' => ['site/index']
+	        /*[
+	        	'label' => 'Новая страница',
+	        	'url' => ['update']
 	        ],
 	        [
-	        	'label' => 'Products',
+	        	'label' => 'Корзина',
 	        	'url' => ['product/index'],
 	        	'items' =>
 	        	[
@@ -30,7 +29,7 @@ class Module extends \yii\base\Module
 	        	'label' => 'Login',
 	        	'url' => ['site/login'],
 	        	'visible' => \Yii::$app->user->isGuest,
-	        ],
+	        ],*/
 		];
         // ... остальной инициализирующий код ...
     }

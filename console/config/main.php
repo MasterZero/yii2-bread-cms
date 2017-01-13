@@ -21,5 +21,14 @@ return [
             ],
         ],
     ],
+
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'templateFile' => '@console/views/migration.php',
+        ],
+    ],
+
+
     'params' => $params,
 ];
