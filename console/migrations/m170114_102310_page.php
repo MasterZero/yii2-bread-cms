@@ -1,17 +1,22 @@
 <?php
 
-//use yii\db\Migration;
-use console\components\Migration;
-use common\modules\page\models\Page;
 
-class m170113_154824_modify_page extends Migration
+
+use console\components\Migration;
+
+class m170114_102310_page extends Migration
 {
     public function up()
     {
-        $this->dropTable(Page::tableName());
+
+        $modelName = '\common\modules\page\models\Page';
+        $table_name = $modelName::tableName();
+
+        if( \Yii::$app->db->schema->getTableSchema($table_name) != null)
+            $this->dropTable($table_name);
 
 
-        $this->createTable(Page::tableName(), [
+        $this->createTable($table_name, [
             'id' => $this->primaryKey()->unsigned(),
             'name' => $this->string(255)->notNull(),
             'url' => $this->string(255)->notNull(),
@@ -26,7 +31,7 @@ class m170113_154824_modify_page extends Migration
 
     public function down()
     {
-        echo "m170113_154824_modify_page cannot be reverted.\n";
+        echo "m170114_102310_page cannot be reverted.\n";
 
         return false;
     }
