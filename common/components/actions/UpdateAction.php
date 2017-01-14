@@ -3,6 +3,8 @@
 
 namespace common\components\actions;
 
+use \yii\db\Expression;
+
 class UpdateAction extends \yii\base\Action
 {
     public function run( $id = null )

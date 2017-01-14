@@ -5,7 +5,6 @@ use Yii;
 use \yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\db\Expression;
 
 class BackendController extends \common\components\DefaultController
 {
