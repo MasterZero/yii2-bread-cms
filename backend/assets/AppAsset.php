@@ -15,7 +15,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/custom.js'
+        'js/custom.js',
+        'js/jquery.nestable.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

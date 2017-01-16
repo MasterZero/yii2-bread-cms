@@ -17,10 +17,10 @@ class NewsCategory extends \yii\db\ActiveRecord
         return [
             'tree' => [
                 'class' => NestedSetsBehavior::className(),
-                // 'treeAttribute' => 'tree',
-                // 'leftAttribute' => 'lft',
-                // 'rightAttribute' => 'rgt',
-                // 'depthAttribute' => 'depth',
+                'treeAttribute' => 'tree',
+                'leftAttribute' => 'lft',
+                'rightAttribute' => 'rgt',
+                'depthAttribute' => 'depth',
             ],
         ];
     }
@@ -29,16 +29,8 @@ class NewsCategory extends \yii\db\ActiveRecord
     {
         return [
             // the name, email, subject and body attributes are required
-            [['name', 'url', 'content'], 'required','message' => 'Это обязательное поле'],
-            [['name', 'url', 'image'], 'string', 'max' => 255],
-            [['content','description'], 'string', 'max' => 65535],
+            [['name'], 'required','message' => 'Это обязательное поле'],
             [['removed'], 'boolean'],
-            ['url', 'unique', 'message' => "Такой url уже существует."],
-            // the email attribute should be a valid email address
-            ['url', 'match', 'pattern' => '/^[a-zA-Z][a-zA-Z0-9-]{2,}$/i',
-                'message' => "Поле должно состоять из букв английского алфавита, цифр и знака минуса (-).
-                Поле должно начинаться только с буквы.
-                Поле должно быть не менее 3 символов."],
             [['removed','index'], 'safe'],
 
         ];

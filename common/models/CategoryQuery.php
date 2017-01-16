@@ -1,6 +1,6 @@
 <?
 
-
+namespace common\models;
 
 use creocoder\nestedsets\NestedSetsQueryBehavior;
 

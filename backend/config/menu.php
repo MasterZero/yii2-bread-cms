@@ -14,5 +14,9 @@ return [
 	            	['label' => 'Most Popular', 'url' => ['product/index', 'tag' => 'popular']],
 	        	]*/
 	        ],
+	        [
+	        	'label' => 'Новости',
+	        	'url' => ['/news'],
+	        ],
 		],
 ];
