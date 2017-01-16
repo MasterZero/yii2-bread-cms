@@ -16,12 +16,14 @@ use console\components\Migration;
 
 class <?= $className ?> extends Migration
 {
+
+    public $moduleName = 'module';
+
     public function up()
     {
-
-        $modelName = '\common\modules\module\models\Model';
-        
-        $table_name = $modelName::tableName();
+        $modelName = ucfirst($this->$moduleName);
+        $modelPath = '\common\modules\\'.$moduleName.'\models\\'.$modelName;
+        $table_name = $modelPath::tableName();
 
         if( \Yii::$app->db->schema->getTableSchema($table_name) != null)
             $this->dropTable($table_name);

@@ -20,6 +20,11 @@ return [
             //'defaultRoute' => 'page',
             // ... другие настройки модуля ...
         ],
+
+        'news' => [
+            'class' => 'backend\modules\news\Module',
+            'name' => 'Новости',
+        ],
     ],
     'components' => [
         'request' => [
