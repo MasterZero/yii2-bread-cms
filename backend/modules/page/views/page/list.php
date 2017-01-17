@@ -32,6 +32,9 @@ $menu_items = ($show_removed) ?
 
 <?= Menu::widget([
     'items' => $menu_items,
+    'options' => [
+        'class' => 'nav nav-tabs'
+        ],
     ]);
 
 

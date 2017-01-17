@@ -25,7 +25,7 @@ class News extends \yii\db\ActiveRecord
                 'message' => "Поле должно состоять из букв английского алфавита, цифр и знака минуса (-).
                 Поле должно начинаться только с буквы.
                 Поле должно быть не менее 3 символов."],
-            [['removed','index'], 'safe'],
+            [['index',self::categoryField()], 'safe'],
 
         ];
     }
@@ -52,18 +52,39 @@ class News extends \yii\db\ActiveRecord
 		]);
     }
 
+
+    public function getCategory()
+    {
+        return $this->hasOne(self::className().'Category', ['id' => 'news_category_id']);
+    }
+
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'name' => 'Название',
             'url' => 'Ссылка',
+            'image' => 'Картинка',
+            'description' => 'Описание',
             'content' => 'Содержание',
+            'index' => 'Порядковый номер',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата изменения',
             'removed' => 'Скрыта',
             'deleted' => 'Удалена',
+            self::categoryField() => 'Категория',
         ];
+    }
+
+
+    public static function categoryField()
+    {
+        return \Yii::$app->controller->module->id.'_category_id';
+    }
+
+    public static function categoryModelName()
+    {
+        return self::class.'Category';
     }
 
 }

@@ -12,7 +12,6 @@ $form = ActiveForm::begin([
     'options' => ['class' => 'form-horizontal col-md-6'],
 ]) ?>
     <?= $form->field($model, 'name', ['options' => ['class' => 'url-copy-field']]) ?>
-    <?= $form->field($model, 'removed')->checkbox() ?>
     <div class="form-group">
         <div class="col-md-4">
             <?= Html::submitButton( ($create) ? 'Создать' : 'Применить', ['class' => 'btn btn-primary']) ?>

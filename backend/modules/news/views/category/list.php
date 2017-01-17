@@ -7,6 +7,10 @@ use yii\helpers\Url;
 
 $menu_items = [
 		[
+	        	'label' => 'Назад',
+	        	'url' => [ Yii::$app->controller->module->id . '/' ]
+	    ],
+		[
 	        	'label' => 'Добавить',
 	        	'url' => ['update']
 	    ],
@@ -20,6 +24,9 @@ $menu_items = [
 
 <?= Menu::widget([
     'items' => $menu_items,
+    'options' => [
+        'class' => 'nav nav-tabs'
+        ],
     ]);
 
 ?>

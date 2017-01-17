@@ -12,6 +12,10 @@ $menu_items = ($show_removed) ?
 	    ]
 	] : // full menu
 	[
+        [
+                'label' => 'Категории',
+                'url' => ['category/']
+        ],
 		[
 	        	'label' => 'Добавить',
 	        	'url' => ['update']
@@ -32,6 +36,9 @@ $menu_items = ($show_removed) ?
 
 <?= Menu::widget([
     'items' => $menu_items,
+    'options' => [
+        'class' => 'nav nav-tabs'
+        ],
     ]);
 
 
@@ -47,20 +54,24 @@ $menu_items = ($show_removed) ?
         'id',
         'name',
         'url',
-        'created_at',
+        [
+            'attribute'=>'news_category_id',
+            'content'=>function($data){
+                return ( Yii::$app->controller->modelName()::categoryModelName() )::findOne( 
+                    $data[Yii::$app->controller->modelName()::categoryField() ] )->name;
+            }
+        ],
         'updated_at',
-        /*'created_at:datetime',*/
-        // ...
-
+        'created_at',
         [
             'class' => 'yii\grid\ActionColumn',
-            'header'=>'Действия', 
+            'header'=>'Действия',
             'headerOptions' => ['width' => '80'],
             'template' => '{hide} {update} {delete}',
             'buttons' => [
                 'update' => function ($url,$model) {
                     return Html::a(
-                    '<span class="glyphicon glyphicon-pencil"></span>', 
+                    '<span class="glyphicon glyphicon-pencil"></span>',
                     $url);
                 },
 
@@ -68,7 +79,7 @@ $menu_items = ($show_removed) ?
 
                 	$icon = $model->removed ? 'glyphicon-eye-close' : 'glyphicon-eye-open';
                     return Html::a(
-                    '<span class="glyphicon '.$icon.'"></span>', 
+                    '<span class="glyphicon '.$icon.'"></span>',
                     $url);
                 },
             ],

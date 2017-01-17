@@ -4,69 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b783c9f6865b4c6082aa88d4a1232385",
-    "content-hash": "8bf83edc1ca3a45a7c1b3dc86071d6c6",
+    "hash": "855f39a592e95326a7f0d47b2fa9232b",
+    "content-hash": "22f9a6731e2044577d4780d0cc840283",
     "packages": [
-        {
-            "name": "2amigos/yii2-tinymce-widget",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/2amigos/yii2-tinymce-widget.git",
-                "reference": "d58bad3ede450f86acd475fb4ecda982b980132b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-tinymce-widget/zipball/d58bad3ede450f86acd475fb4ecda982b980132b",
-                "reference": "d58bad3ede450f86acd475fb4ecda982b980132b",
-                "shasum": ""
-            },
-            "require": {
-                "tinymce/tinymce": ">=4",
-                "yiisoft/yii2": "~2.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "asset-installer-paths": {
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "dosamigos\\tinymce\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "2amigOS! Consulting Group",
-                    "email": "hola@2amigos.us",
-                    "homepage": "http://2amigos.us",
-                    "role": "Developer"
-                }
-            ],
-            "description": "TinyMCE widget for Yii2.",
-            "homepage": "http://yiiwheels.com/extension/tinymce-widget",
-            "keywords": [
-                "2amigos",
-                "extension",
-                "tinymce",
-                "widget",
-                "yii",
-                "yii 2",
-                "yii2"
-            ],
-            "time": "2015-03-28 21:53:43"
-        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -610,6 +550,35 @@
             "time": "2016-09-04 09:25:29"
         },
         {
+            "name": "masterzero/yii2-activefield",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MasterZero/yii2-activefield.git",
+                "reference": "491b999dd1e38237cf78e6f19a4887fcd83228be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MasterZero/yii2-activefield/zipball/491b999dd1e38237cf78e6f19a4887fcd83228be",
+                "reference": "491b999dd1e38237cf78e6f19a4887fcd83228be",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-icons": "@dev",
+                "zxbodya/yii2-elfinder": "*@dev",
+                "zxbodya/yii2-tinymce": "*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "masterzero\\activefield\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Cumstom Yii class ActiveField to work with tinymce, elfinder, and auto translit.",
+            "time": "2017-01-17 07:54:49"
+        },
+        {
             "name": "masterzero/yii2-nestable",
             "version": "v1.0.1",
             "source": {
@@ -739,52 +708,6 @@
                 "mailer"
             ],
             "time": "2016-12-29 10:02:40"
-        },
-        {
-            "name": "tinymce/tinymce",
-            "version": "4.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "7b45b6de0b8835d5b54dafbd4a3c5a0e11abc3d6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/7b45b6de0b8835d5b54dafbd4a3c5a0e11abc3d6",
-                "reference": "7b45b6de0b8835d5b54dafbd4a3c5a0e11abc3d6",
-                "shasum": ""
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "tinymce.js",
-                        "plugins/*/plugin.js",
-                        "themes/*/theme.js"
-                    ],
-                    "files": [
-                        "tinymce.min.js",
-                        "plugins/*/plugin.min.js",
-                        "themes/*/theme.min.js",
-                        "skins/**"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1"
-            ],
-            "description": "Web based JavaScript HTML WYSIWYG editor control.",
-            "homepage": "http://www.tinymce.com",
-            "keywords": [
-                "editor",
-                "html",
-                "javascript",
-                "richtext",
-                "tinymce",
-                "wysiwyg"
-            ],
-            "time": "2017-01-04 13:58:37"
         },
         {
             "name": "yiisoft/yii2",
@@ -1079,6 +1002,99 @@
                 "yii2"
             ],
             "time": "2016-09-09 11:48:11"
+        },
+        {
+            "name": "zxbodya/yii2-elfinder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zxbodya/yii2-elfinder.git",
+                "reference": "1d51b6db0e02aac6e6e7f8a4c42fc67670c1df89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zxbodya/yii2-elfinder/zipball/1d51b6db0e02aac6e6e7f8a4c42fc67670c1df89",
+                "reference": "1d51b6db0e02aac6e6e7f8a4c42fc67670c1df89",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-jui": "*"
+            },
+            "suggest": {
+                "zxbodya/yii2-tinymce": "Extension with TinyMce WYSIWYG editor, that can be used with elFinder"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "zxbodya\\yii2\\elfinder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bogdan Savluk",
+                    "email": "savluk.bogdan@gmail.com"
+                }
+            ],
+            "description": "Extension to use elFinder 1.x file manager in Yii2 application",
+            "keywords": [
+                "elfinder",
+                "extension",
+                "file manager",
+                "tinymce",
+                "widget",
+                "yii2"
+            ],
+            "time": "2014-10-07 19:20:45"
+        },
+        {
+            "name": "zxbodya/yii2-tinymce",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zxbodya/yii2-tinymce.git",
+                "reference": "0c1dfeb16ba421bd2d2e8e6b8540788b1af3efce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zxbodya/yii2-tinymce/zipball/0c1dfeb16ba421bd2d2e8e6b8540788b1af3efce",
+                "reference": "0c1dfeb16ba421bd2d2e8e6b8540788b1af3efce",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "suggest": {
+                "zxbodya/yii2-elfinder": "To add elFinder file manager"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "zxbodya\\yii2\\tinymce\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bogdan Savluk",
+                    "email": "savluk.bogdan@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension to use TinyMce with Compressor and FileManager",
+            "keywords": [
+                "extension",
+                "tinymce",
+                "wysiwyg",
+                "yii2"
+            ],
+            "time": "2015-11-29 16:06:03"
         }
     ],
     "packages-dev": [
@@ -3447,7 +3463,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zxbodya/yii2-tinymce": 20,
+        "zxbodya/yii2-elfinder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
