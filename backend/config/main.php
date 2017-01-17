@@ -25,6 +25,11 @@ return [
             'class' => 'backend\modules\news\Module',
             'name' => 'Новости',
         ],
+
+        'container' => [
+            'class' => 'backend\modules\container\Module',
+            'name' => 'Контейнер',
+        ],
     ],
     'components' => [
         'request' => [
