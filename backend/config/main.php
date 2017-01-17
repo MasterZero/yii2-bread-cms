@@ -30,6 +30,11 @@ return [
             'class' => 'backend\modules\container\Module',
             'name' => 'Контейнер',
         ],
+
+        'set' => [
+            'class' => 'backend\modules\set\Module',
+            'name' => 'Настройки',
+        ],
     ],
     'components' => [
         'request' => [

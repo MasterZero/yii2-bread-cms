@@ -7,7 +7,7 @@ use console\components\Migration;
 class m170117_104244_container extends Migration
 {
 
-    public $moduleName = 'module';
+    public $moduleName = 'container';
 
     public function up()
     {
@@ -18,11 +18,11 @@ class m170117_104244_container extends Migration
         $table_name = $modelPath::tableName();
         $item_table_name =  $itemModelPath::tableName();
 
-        if( \Yii::$app->db->schema->getTableSchema($table_name) != null)
-            $this->dropTable($table_name);
-
         if( \Yii::$app->db->schema->getTableSchema($item_table_name) != null)
             $this->dropTable($item_table_name);
+
+        if( \Yii::$app->db->schema->getTableSchema($table_name) != null)
+            $this->dropTable($table_name);
 
 
 
@@ -37,7 +37,7 @@ class m170117_104244_container extends Migration
 
             'created_at' => $this->datetime()->notNull(),
             'updated_at' => $this->datetime()->notNull(),
-            'deleted_at' => $this->datetime(),
+            'deleted_at' => $this->datetime()->notNull(),
             'removed' => $this->boolean()->notNull(),
             'deleted' => $this->boolean()->notNull(),
 

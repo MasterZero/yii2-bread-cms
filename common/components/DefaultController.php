@@ -6,6 +6,7 @@ use \yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\db\Expression;
+use common\modules\set\models\Set;
 
 class DefaultController extends \yii\web\Controller
 {
@@ -16,7 +17,7 @@ class DefaultController extends \yii\web\Controller
             return false;
 
         if(isset($this->module) && isset($this->module->name))
-            $this->view->title = $this->module->name;
+            $this->view->title =  Set::value('name').' - '.$this->module->name;
 
         return true;
     }

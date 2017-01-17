@@ -11,9 +11,9 @@ $form = ActiveForm::begin([
     'id' => 'update-form',
     'options' => ['class' => 'form-horizontal'],
 ]) ?>
-    <?= $form->field($model, 'name')->copyName() ?>
-    <?= $form->field($model, 'url')->PasteToUrl() ?>
-    <?= $form->field($model, 'content')->tinyMCE() ?>
+    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'value') ?>
+    <?= $form->field($model, 'description') ?>
 
     <div class="form-group">
         <div class="col-md-4">

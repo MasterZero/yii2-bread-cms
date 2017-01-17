@@ -1,23 +1,13 @@
 <?php
-/**
- * This view is used by console/controllers/MigrateController.php
- * The following variables are available in this view:
- */
-/* @var $className string the new migration class name */
-
-
-
-echo "<?php\n";
-?>
 
 
 
 use console\components\Migration;
 
-class <?= $className ?> extends Migration
+class m170117_114815_set extends Migration
 {
 
-    public $moduleName = 'module';
+    public $moduleName = 'set';
 
     public function up()
     {
@@ -31,9 +21,9 @@ class <?= $className ?> extends Migration
 
         $this->createTable($table_name, [
             'id' => $this->primaryKey()->unsigned(),
-            'name' => $this->string(255)->notNull(),
-            'url' => $this->string(255)->notNull(),
-            'content' => $this->longText()->notNull(),
+            'name' => $this->string(255)->notNull()->unique(),
+            'description' => $this->string(255)->notNull(),
+            'value' => $this->longText()->notNull(),
             'created_at' => $this->datetime()->notNull(),
             'updated_at' => $this->datetime()->notNull(),
             'deleted_at' => $this->datetime(),
@@ -44,7 +34,7 @@ class <?= $className ?> extends Migration
 
     public function down()
     {
-        echo "<?= $className ?> cannot be reverted.\n";
+        echo "m170117_114815_set cannot be reverted.\n";
 
         return false;
     }

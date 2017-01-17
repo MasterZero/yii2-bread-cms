@@ -1,10 +1,6 @@
 <?php
 return [
     'menuItems' => [
-    		[
-	        	'label' => 'Главная',
-	        	'url' => ['/site/index']
-	        ],
 	        [
 	        	'label' => 'Страницы',
 	        	'url' => ['/page'],
@@ -22,7 +18,9 @@ return [
 	        	'label' => 'Контейнеры',
 	        	'url' => ['/container'],
 	        ],
-
-	        
+	        [
+	        	'label' => 'Настройки',
+	        	'url' => ['/set'],
+	        ],
 		],
 ];
