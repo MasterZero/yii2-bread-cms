@@ -2,24 +2,27 @@
 use yii\grid\GridView;
 use yii\widgets\Menu;
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 
 $menu_items = ($show_removed) ?
 	[
 		[
 	        	'label' => 'Назад',
-	        	'url' => ['list']
+	        	'url' => ['list', 'container_id' => $container->id]
 	    ]
 	] : // full menu
 	[
+        [
+                'label' => 'Назад',
+                'url' => ['container/']
+        ],
 		[
 	        	'label' => 'Добавить',
-	        	'url' => ['update']
+	        	'url' => ['update','container_id' => $container->id]
 	    ],
 	    [
 	        	'label' => 'Корзина',
-	        	'url' => ['list', 'show_removed' => true ]
+	        	'url' => ['list', 'show_removed' => true , 'container_id' => $container->id ]
 	    ],
 	];
 
@@ -42,7 +45,7 @@ $menu_items = ($show_removed) ?
 ?>
 
 
-<h1><?= Yii::$app->controller->module->name ?></h1>
+<h1><?= Yii::$app->controller->module->name ?> объекта "<?= $container->name ?>"</h1>
 
 
 <?= GridView::widget([
@@ -53,24 +56,24 @@ $menu_items = ($show_removed) ?
         'url',
         'created_at',
         'updated_at',
+        [
+            'attribute'=>'image',
+            'content'=>function($data){
+                return Html::img($data['image'],[ 'class' => 'img-responsive' ]);
+            }
+        ],
         /*'created_at:datetime',*/
         // ...
 
         [
             'class' => 'yii\grid\ActionColumn',
-            'header'=>'Действия',
+            'header'=>'Действия', 
             'headerOptions' => ['width' => '80'],
-            'template' => '{edit} {hide} {update} {delete}',
+            'template' => '{hide} {update} {delete}',
             'buttons' => [
-
-                'edit' => function ($url,$model) {
-                    return Html::a(
-                    '<span class="glyphicon glyphicon-list"></span>',
-                    Url::to(['item/', 'container_id' => $model->id]) );
-                },
                 'update' => function ($url,$model) {
                     return Html::a(
-                    '<span class="glyphicon glyphicon-pencil"></span>',
+                    '<span class="glyphicon glyphicon-pencil"></span>', 
                     $url);
                 },
 
@@ -78,7 +81,7 @@ $menu_items = ($show_removed) ?
 
                 	$icon = $model->removed ? 'glyphicon-eye-close' : 'glyphicon-eye-open';
                     return Html::a(
-                    '<span class="glyphicon '.$icon.'"></span>',
+                    '<span class="glyphicon '.$icon.'"></span>', 
                     $url);
                 },
             ],

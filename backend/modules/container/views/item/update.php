@@ -16,6 +16,7 @@ $form = ActiveForm::begin([
     <?= $form->field($model, 'image')->elFinder() ?>
     <?= $form->field($model, 'content')->tinyMCE() ?>
     <?= $form->field($model, 'description')->tinyMCE() ?>
+    <?//$form->field($model, 'container_id')->hiddenInput(['value' => $container->id]) ?>
 
     <div class="form-group">
         <div class="col-md-4">

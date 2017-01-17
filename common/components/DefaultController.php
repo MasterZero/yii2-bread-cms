@@ -46,8 +46,6 @@ class DefaultController extends \yii\web\Controller
     public function modelName()
     {
     	$controller_name = $this->module->id;
-
-
     	return '\\common\\modules\\'.$controller_name.'\\models\\'. ucfirst($controller_name);
     }
 }

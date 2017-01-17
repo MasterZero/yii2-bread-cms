@@ -4,10 +4,10 @@
 
 use console\components\Migration;
 
-class m170117_085013_container extends Migration
+class m170117_104244_container extends Migration
 {
 
-    public $moduleName = 'container';
+    public $moduleName = 'module';
 
     public function up()
     {
@@ -37,7 +37,7 @@ class m170117_085013_container extends Migration
 
             'created_at' => $this->datetime()->notNull(),
             'updated_at' => $this->datetime()->notNull(),
-            'deleted_at' => $this->datetime()->notNull(),
+            'deleted_at' => $this->datetime(),
             'removed' => $this->boolean()->notNull(),
             'deleted' => $this->boolean()->notNull(),
 
@@ -68,7 +68,7 @@ class m170117_085013_container extends Migration
 
     public function down()
     {
-        echo "m170117_085013_container cannot be reverted.\n";
+        echo "m170117_104244_container cannot be reverted.\n";
 
         return false;
     }

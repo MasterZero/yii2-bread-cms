@@ -21,7 +21,7 @@ class <?= $className ?> extends Migration
 
     public function up()
     {
-        $modelName = ucfirst($this->$moduleName);
+        $modelName = ucfirst($this->moduleName);
         $modelPath = '\common\modules\\'.$moduleName.'\models\\'.$modelName;
         $table_name = $modelPath::tableName();
 

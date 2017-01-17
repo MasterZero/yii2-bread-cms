@@ -4,11 +4,11 @@
 namespace common\modules\container\models;
 use yii\data\ActiveDataProvider;
 
-class Container extends \yii\db\ActiveRecord
+class ContainerItem extends \yii\db\ActiveRecord
 {
     public static function tableName()
     {
-        return '{{%container}}';
+        return '{{%container_item}}';
     }
 
     public function rules()
@@ -19,6 +19,7 @@ class Container extends \yii\db\ActiveRecord
             [['name', 'url','image'], 'string', 'max' => 255],
             [['content','description'], 'string', 'max' => 65535],
             [['removed','deleted'], 'boolean'],
+            [['container_id'], 'integer'],
             ['url', 'unique', 'message' => "Такой url уже существует."],
             // the email attribute should be a valid email address
             ['url', 'match', 'pattern' => '/^[a-zA-Z][a-zA-Z0-9-]{2,}$/i',
@@ -32,15 +33,15 @@ class Container extends \yii\db\ActiveRecord
 
 
 
-    public static function search( $show_removed = null)
+    public static function search( $container_id, $show_removed = null)
     {
 
-    	$query = self::find();
+    	$query = self::find()->where([ 'container_id' => $container_id ]);
 
         if (isset($show_removed) && $show_removed)
-            $query = self::find()->where(['deleted' => true]);
+            $query = $query->andWhere(['deleted' => true]);
         else
-            $query = self::find()->where(['deleted' => false]);
+            $query = $query->andWhere(['deleted' => false]);
 
 
 
