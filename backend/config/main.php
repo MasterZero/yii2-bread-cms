@@ -39,6 +39,10 @@ return [
             'class' => 'backend\modules\seo\Module',
             'name' => 'SEO',
         ],
+        'gallery' => [
+            'class' => 'backend\modules\gallery\Module',
+            'name' => 'Галерея',
+        ],
     ],
     'components' => [
         'request' => [

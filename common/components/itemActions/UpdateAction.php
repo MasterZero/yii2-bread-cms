@@ -12,8 +12,11 @@ class UpdateAction extends \yii\base\Action
 
     	$model = $this->controller->getModel($id);
 
+
+        $field_name = \Yii::$app->controller->module->id . '_id';
+
         if(!$model->isNewRecord)
-            $container_id = $model->container_id;
+            $container_id = $model->$field_name;
         elseif (is_null($container_id))
             throw new NotFoundHttpException;
 
@@ -26,8 +29,8 @@ class UpdateAction extends \yii\base\Action
 
         if ($model->load(\Yii::$app->request->post()))
         {
-
-            $model->container_id = $container_id;
+            
+            $model->$field_name = $container_id;
 
             if($model->isNewRecord)
             {
@@ -37,6 +40,7 @@ class UpdateAction extends \yii\base\Action
             }
 
             $model->updated_at = new Expression('NOW()');
+
 
             if($model->save())
                 return $this->controller->redirect(['list','container_id' => $container_id]);

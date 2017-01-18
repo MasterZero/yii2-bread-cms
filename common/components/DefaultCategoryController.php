@@ -12,7 +12,7 @@ class DefaultCategoryController extends DefaultController
 
     public function modelName()
     {
-    	$controller_name = $this->module->id;
+    	//$controller_name = $this->module->id;
 
 
     	return parent::modelName().'Category';

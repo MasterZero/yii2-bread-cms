@@ -17,6 +17,12 @@ class UpdateAction extends \yii\base\Action
 
             if($model->isNewRecord)
             {
+                if( $model->hasAttribute('removed') )
+                    $model->removed = 0;
+
+                if( $model->hasAttribute('deleted') )
+                    $model->deleted = 0;
+
                 $model->created_at = new Expression('NOW()');
             }
 

@@ -26,5 +26,9 @@ return [
 	        	'label' => 'SEO продвижение',
 	        	'url' => ['/seo'],
 	        ],
+	        [
+	        	'label' => 'Галерея',
+	        	'url' => ['/gallery'],
+	        ],
 		],
 ];
