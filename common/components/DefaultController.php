@@ -11,6 +11,8 @@ use common\modules\set\models\Set;
 class DefaultController extends \yii\web\Controller
 {
 
+    public $model = null;
+
     public function beforeAction($action)
     {
         if(!parent::beforeAction($action))
@@ -38,6 +40,9 @@ class DefaultController extends \yii\web\Controller
 
             if(!isset($model))
                 throw new NotFoundHttpException;
+
+
+            $this->model = $model;
 
 
             return $model;

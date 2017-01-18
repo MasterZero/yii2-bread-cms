@@ -35,6 +35,10 @@ return [
             'class' => 'backend\modules\set\Module',
             'name' => 'Настройки',
         ],
+        'seo' => [
+            'class' => 'backend\modules\seo\Module',
+            'name' => 'SEO',
+        ],
     ],
     'components' => [
         'request' => [

@@ -55,6 +55,11 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
+
+        <?= backend\modules\seo\widgets\SeoWidget::widget() ?>
+
+
+
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

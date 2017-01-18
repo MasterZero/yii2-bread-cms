@@ -118,3 +118,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+.modal-content>.form-horizontal {
+    padding-left: 20px;
+    padding-right: 20px;
+}
