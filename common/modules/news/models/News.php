@@ -53,6 +53,31 @@ class News extends \yii\db\ActiveRecord
     }
 
 
+    public static function searchFrontend(  )
+    {
+
+        $query = self::find();
+
+        $query->andWhere( [ 'removed' => false] );
+        $query->andWhere( [ 'deleted' => false] );
+
+
+
+        return  new ActiveDataProvider([
+            'query' => $query,
+            /*'pagination' => [
+                'pageSize' => 10,
+            ],*/
+        ]);
+    }
+
+
+
+
+
+    
+
+
     public function getCategory()
     {
         return $this->hasOne(self::className().'Category', ['id' => 'news_category_id']);

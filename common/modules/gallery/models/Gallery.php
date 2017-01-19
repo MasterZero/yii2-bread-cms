@@ -71,9 +71,31 @@ class Gallery extends \yii\db\ActiveRecord
     }
 
 
+    public static function searchFrontend( $url = null )
+    {
+
+        if(is_null($url))
+            $query = self::find()->where(['depth' => 0] );
+        else
+        {
+            $model = self::find()->where(['url' => $url])->one();
+            $query = $model->children(1);
+        }
+
+        $query->andWhere( [ 'removed' => false] );
+        $query->andWhere( [ 'deleted' => false] );
+
+
+
+        return  new ActiveDataProvider([
+            'query' => $query,
+        ]);
+    }
+
+
     public function getImages()
     {
-        return $this->hasMany(self::className().'Item', ['category_id' => 'id']);
+        return $this->hasMany(self::className().'Item', ['gallery_id' => 'id']);
     }
 
     public function attributeLabels()

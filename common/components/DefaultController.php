@@ -54,4 +54,9 @@ class DefaultController extends \yii\web\Controller
     	$controller_name = $this->module->id;
     	return '\\common\\modules\\'.$controller_name.'\\models\\'. ucfirst($controller_name);
     }
+
+    public function getUrlByModel($model)
+    {
+        return '\\'.\yii::$app->controller->id.'\\'.$model->url;
+    }
 }

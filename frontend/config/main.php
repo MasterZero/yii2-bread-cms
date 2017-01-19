@@ -11,6 +11,37 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'page' => [
+            'class' => 'frontend\modules\page\Module',
+            'name' => 'Страницы',
+            //'defaultRoute' => 'page',
+            // ... другие настройки модуля ...
+        ],
+
+        'news' => [
+            'class' => 'frontend\modules\news\Module',
+            'name' => 'Новости',
+        ],
+
+        'container' => [
+            'class' => 'frontend\modules\container\Module',
+            'name' => 'Контейнер',
+        ],
+
+        'set' => [
+            'class' => 'frontend\modules\set\Module',
+            'name' => 'Настройки',
+        ],
+        'seo' => [
+            'class' => 'frontend\modules\seo\Module',
+            'name' => 'SEO',
+        ],
+        'gallery' => [
+            'class' => 'frontend\modules\gallery\Module',
+            'name' => 'Галерея',
+        ],
+    ],
     'components' => [
 
 
@@ -43,6 +74,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/page/<url>' => '/page/page/view',
+                '/news/<url>' => '/news/news/view',
+                '/news' => '/news/news/list',
+                '/gallery/<url>' => '/gallery/gallery/view',
+                '/gallery' => '/gallery/gallery/list',
             ],
         ],
     ],
