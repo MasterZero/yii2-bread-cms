@@ -1,10 +1,32 @@
 <?
 namespace backend\modules\seo\controllers;
+use yii\filters\AccessControl;
 
 class SeoController extends \common\components\DefaultController/*\yii\web\Controller*/
 {
 	public $defaultAction = 'seo';
 
+
+	public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //'actions' => ['login', 'error'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        //'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
 
 	public function actionSeo($module = null, $controller = null, $model_pk = null)

@@ -93,6 +93,15 @@ class Gallery extends \yii\db\ActiveRecord
     }
 
 
+    public function getFrontendImages()
+    {
+        return (self::className().'Item')::findAll([
+            'gallery_id' => $this->id,
+            'removed' => false,
+            'deleted' => false]);
+    }
+
+
     public function getImages()
     {
         return $this->hasMany(self::className().'Item', ['gallery_id' => 'id']);

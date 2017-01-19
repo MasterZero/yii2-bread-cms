@@ -27,17 +27,12 @@ class SeoWidget extends \yii\base\Widget
         {
             $model = $controller->modelName()::findOne([ 'url' => $url ]);
 
-           //echo $model->name;
 
             if($model)
                 $model_pk = $model->id;
             else
                 $model_pk = null;
         }
-
-
-        var_dump($model_pk);
-
 
         $seo_model = Seo::findOne( [
             'model_pk' => $model_pk,

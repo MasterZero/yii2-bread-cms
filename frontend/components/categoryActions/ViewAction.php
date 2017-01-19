@@ -20,7 +20,7 @@ class ViewAction extends \yii\base\Action
         return $this->controller->render('view', [
             'model' => $model,
             'categoryDataProvider' => $model->searchFrontend( $url ),
-            'items' => $model->images ]);
+            'items' => $model->frontendImages ]);
 
     }
 }
