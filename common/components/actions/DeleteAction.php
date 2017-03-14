@@ -11,7 +11,7 @@ class DeleteAction extends \yii\base\Action
         $model = $this->controller->getModel($id);
 
         $model->deleted ^= true;
-
+// Серега привет
 
         if($model->deleted)
         	$model->deleted_at = new Expression('NOW()');
