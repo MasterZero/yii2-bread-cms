@@ -10,6 +10,11 @@ class DeleteAction extends \yii\base\Action
     {
         $model = $this->controller->getModel($id);
 
+        if(!$model->hasAttr('deleted'))
+            throw new \yii\web\BadRequestHttpException(
+                    'У данной таблицы нет метки "в корзине"');
+
+
         $model->deleted ^= true;
 
 

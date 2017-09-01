@@ -5,7 +5,8 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use common\modules\user\models\LoginForm;
+use common\modules\user\models\SignupForm;
 
 /**
  * Site controller
@@ -22,11 +23,21 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error','captcha'],
+                        'roles' => ['?'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['signup'],
+                        'allow' =>  Yii::$app->params['regNewAdmin'] ,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'roles' => ['?'],
+                        'allow' => false,
+                    ],
+                    [
+                        //'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -41,14 +52,15 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                //'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -63,6 +75,11 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionElfinder()
+    {
+        return $this->render('elfinder');
+    }
+
     /**
      * Login action.
      *
@@ -70,6 +87,9 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
+        $this->layout = 'login';
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -95,4 +115,27 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+
+
+    public function actionSignup()
+    {
+        $this->layout = 'login';
+        
+        $model = new SignupForm;
+        if ($model->load(Yii::$app->request->post()) ) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+
+
 }

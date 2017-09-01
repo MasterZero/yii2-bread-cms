@@ -1,43 +1,45 @@
 <?
-use yii\grid\GridView;
+use common\widgets\GridView;
 use yii\widgets\Menu;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 
-$menu_items = [
-		[
-	        	'label' => 'Назад',
-	        	'url' => [ Yii::$app->controller->module->id . '/' ]
-	    ],
-		[
-	        	'label' => 'Добавить',
-	        	'url' => ['update']
-	    ],
-	];
+if($trash)
+    $this->params['buttons'] = ['list'];
+else
+{
+    $this->params['buttons'] = [
+        'add',
+        'trash',
+        /*[
+            'icon' => 'plus',
+            'label' => 'Кнопка',
+            'url' => ['update'],
+            'btn_class' => 'btn-danger',
+        ]*/
+    ];
+
+    if($baseModelName::getCategoryName())
+        $this->params['buttons'][] = 'category';
+
+    if($baseModelName::getBaseName())
+        $this->params['buttons'][] = 'base';
+}
 
 ?>
 
+<h1><?= Yii::$app->controller->module->name ?>
+     - <?= $trash ? 'корзина':'список';?> категорий</h1>
 
 
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'controllerModel' => $baseModelName,
+    'trash' => $trash,
+    'columns' => [],
+]) ?>
 
 
-<?= Menu::widget([
-    'items' => $menu_items,
-    'options' => [
-        'class' => 'nav nav-tabs'
-        ],
-    ]);
-
-?>
-
-
-<h1>Категории модуля "<?= Yii::$app->controller->module->name ?>"</h1>
-
-
-
-<?= masterzero\widgets\Nestable::widget([
-            'query' => $query,
-        ]);
-?>
 

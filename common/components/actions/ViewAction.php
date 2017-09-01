@@ -12,7 +12,7 @@ class ViewAction extends \yii\base\Action
 
         if(!$model)
             throw new \yii\web\NotFoundHttpException('Данной страницы не существует');
-        
+
 
         return $this->controller->render('view', [
             'model' => $model]);

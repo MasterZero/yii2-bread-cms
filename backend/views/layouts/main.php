@@ -5,10 +5,21 @@
 
 use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+
+
+$menuItems = [
+    [
+        'url' => ['/url/to/module'],
+        'icon' => 'bus',
+        'label' => 'Костыльная ссылка в меню',
+    ],
+];
+
+
+
 
 AppAsset::register($this);
 ?>
@@ -17,6 +28,7 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -25,52 +37,53 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = Yii::$app->params['menuItems'];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-
-        <?= backend\modules\seo\widgets\SeoWidget::widget() ?>
 
 
 
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+
+
+
+    <div class="wrap ">
+        
+
+    <?= \common\widgets\menu\MenuWidget::widget(['items' => $menuItems]); ?>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="btn-group">
+
+                    <?
+                    if(isset($this->params['buttons']))
+                    {
+                        echo 
+                            \common\widgets\navigation\NavigationWidget::
+                            widget(
+                                ['items' => $this->params['buttons']]);
+                        
+                    }?>
+                </div>
+                
+
+
+                
+                <?= Alert::widget() ?>
+                <?= $content ?>
+
+                <?/* Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ])*/ ?>
+
+
+
+            </div>
+        </div>
     </div>
-</div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Custom Development Studio <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

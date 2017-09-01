@@ -2,14 +2,11 @@
 
 namespace backend\modules\news;
 
-class Module extends \yii\base\Module
+class Module extends \common\components\Module
 {
-	public $menuItems;
-	public $name;
-	public $defaultRoute = 'news';
+	public static $name = 'Новости';
+	public static $icon = 'newspaper-o';
+	public $defaultRoute = 'module';
 
-    public function init()
-    {
-        parent::init();
-    }
+
 }

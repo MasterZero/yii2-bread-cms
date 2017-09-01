@@ -6,28 +6,32 @@ use \yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\db\Expression;
-use common\modules\set\models\Set;
+//use common\modules\set\models\Set;
+
+
 
 class DefaultController extends \yii\web\Controller
 {
 
-    public $model = null;
+    public $defaultAction = 'list';
+
 
     public function beforeAction($action)
     {
         if(!parent::beforeAction($action))
             return false;
 
-        if(isset($this->module) && isset($this->module->name))
-            $this->view->title =  Set::value('name').' - '.$this->module->name;
-
+        //if(isset($this->module) && isset($this->module->name))
+           // $this->view->title =  Set::value('name').' - '.$this->module->name;
         return true;
     }
+
+
 
     public function getModel($id = null)
     {
 
-        $modelName = $this->modelName();
+        $modelName = $this->modelName;
 
         if(!isset($modelName))
             throw new NotFoundHttpException;
@@ -42,21 +46,95 @@ class DefaultController extends \yii\web\Controller
                 throw new NotFoundHttpException;
 
 
-            $this->model = $model;
-
-
             return $model;
         }
     }
 
-    public function modelName()
+    public function GetModelName()
     {
-    	$controller_name = $this->module->id;
-    	return '\\common\\modules\\'.$controller_name.'\\models\\'. ucfirst($controller_name);
+    	$module_name = $this->module->id;
+        $controller_name = $this->id;
+
+        $modelname = 
+            '\\common\\modules\\'.
+            $module_name.
+            '\\models\\'.
+            ucfirst($module_name);
+
+        if($controller_name != 'module')
+            $modelname .= ucfirst($controller_name);
+
+    	return $modelname;
     }
 
-    public function getUrlByModel($model)
+    
+    public static function sendAdminMail($subject, $html)
     {
-        return '\\'.\yii::$app->controller->id.'\\'.$model->url;
+        //$from = Set::value('send_from');
+        //$to = Set::value('send_mail');
+        //$to2 = Set::value('send_mail2');
+    
+        if(!empty($to))
+            Yii::$app->mailer->compose()
+                    ->setFrom($from )
+                    ->setTo($to)
+                    ->setSubject($subject)
+                    ->setHtmlBody($html)
+                    ->send();
+                    
+        if(!empty($to2))
+            Yii::$app->mailer->compose()
+                    ->setFrom($from )
+                    ->setTo($to2)
+                    ->setSubject($subject)
+                    ->setHtmlBody($html)
+                    ->send();
     }
+
+
+
+
+
+
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //'actions' => ['login', 'error'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        //'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+
+
+    public function actions()
+    {
+        return [
+            'list' => [ 'class' => 'common\components\actions\ListAction' ],
+            'update' => [ 'class' => 'common\components\actions\UpdateAction' ],
+            'hide' => [ 'class' => 'common\components\actions\HideAction' ],
+            'delete' => [ 'class' => 'common\components\actions\DeleteAction' ],
+            'destroy' => [ 'class' => 'common\components\actions\DestroyAction' ],
+            'clone' => [ 'class' => 'common\components\actions\CloneAction' ],
+        ];
+    }
+    
 }

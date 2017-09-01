@@ -8,55 +8,30 @@
 
 
 echo "<?php\n";
+
+$matches = [];
+
+
+preg_match('/m\d+_\d+_(\S+)/', $className, $matches );
+
+$module_name = $matches[1];
+
+
 ?>
-
-
-
 use console\components\Migration;
 
 class <?= $className ?> extends Migration
 {
 
-    public $moduleName = 'module';
+    public $moduleName = '<?= $module_name ?>';
 
-    public function up()
-    {
-        $modelName = ucfirst($this->moduleName);
-        $modelPath = '\common\modules\\'.$this->moduleName.'\models\\'.$modelName;
-        $table_name = $modelPath::tableName();
-
-        if( \Yii::$app->db->schema->getTableSchema($table_name) != null)
-            $this->dropTable($table_name);
-
-
-        $this->createTable($table_name, [
-            'id' => $this->primaryKey()->unsigned(),
-            'name' => $this->string(255)->notNull(),
-            'url' => $this->string(255)->notNull(),
-            'content' => $this->longText()->notNull(),
-            'created_at' => $this->datetime()->notNull(),
-            'updated_at' => $this->datetime()->notNull(),
-            'deleted_at' => $this->datetime(),
-            'removed' => $this->boolean()->notNull(),
-            'deleted' => $this->boolean()->notNull(),
-        ]);
-    }
-
-    public function down()
-    {
-        echo "<?= $className ?> cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
+        return $this->model::migrate_up($this);
     }
 
     public function safeDown()
     {
+        return $this->model::migrate_down($this);
     }
-    */
 }

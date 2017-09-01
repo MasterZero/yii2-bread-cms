@@ -1,17 +1,29 @@
-<?
-
+<?php
 
 namespace common\modules\news\models;
-use yii\data\ActiveDataProvider;
+
+
+use \common\components\UrlValidator;
 use creocoder\nestedsets\NestedSetsBehavior;
 
-class NewsCategory extends \yii\db\ActiveRecord
+class NewsCategory extends \common\components\ActiveRecord
 {
     public static function tableName()
     {
         return '{{%news_category}}';
     }
 
+    public function customRules()
+    {
+        return [
+            [['name', 'url', 'content','image'], 'required'],
+            [['name', 'url','image'], 'string', 'max' => 255],
+            [['content','description'], 'string', 'max' => 65535],
+            //[['removed','deleted'], 'boolean'],
+            ['url', 'unique'],
+            ['url', UrlValidator::className() ],
+        ];
+    }
 
     public function behaviors() {
         return [
@@ -25,58 +37,37 @@ class NewsCategory extends \yii\db\ActiveRecord
         ];
     }
 
-    public function rules()
+
+
+    public static function table_chema( $migration )
     {
         return [
-            // the name, email, subject and body attributes are required
-            [['name'], 'required','message' => 'Это обязательное поле'],
-            [['removed'], 'boolean'],
-            [['removed','index'], 'safe'],
 
+            'id' => $migration->primaryKey()->unsigned(),
+            'name' => $migration->string(255)->notNull(),
+            'url' => $migration->string(255)->notNull(),
+            'image' => $migration->string(255)->notNull(),
+            'content' => $migration->longText()->notNull(),
+            'description' => $migration->longText(),
+
+
+            'tree' => $this->integer()->unsigned()->notNull(),
+            'lft' => $this->integer()->unsigned()->notNull(),
+            'rgt' => $this->integer()->unsigned()->notNull(),
+            'depth' => $this->integer()->unsigned()->notNull(),
+            'name' => $this->string()->unsigned()->notNull(),
+
+            'created_at' => $migration->datetime()->notNull(),
+            'updated_at' => $migration->datetime()->notNull(),
+            'deleted_at' => $migration->datetime(),
+            'removed' => $migration->boolean()->notNull(),
+            'deleted' => $migration->boolean()->notNull(),
         ];
     }
 
-
-    public function transactions()
+    public function customLabels()
     {
-        return [
-            self::SCENARIO_DEFAULT => self::OP_ALL,
-        ];
-    }
-
-    public static function find()
-    {
-        return new \common\models\CategoryQuery(get_called_class());
-    }
-
-
-    public static function search( $show_removed = null)
-    {
-
-    	$query = self::find();
-
-
-
-    	return  new ActiveDataProvider([
-		    'query' => $query,
-		    /*'pagination' => [
-		        'pageSize' => 10,
-		    ],*/
-		]);
-    }
-
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'name' => 'Название',
-            'url' => 'Ссылка',
-            'content' => 'Содержание',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата изменения',
-            'removed' => 'Скрыта',
-            'deleted' => 'Удалена',
-        ];
+        return [];
     }
 
 }

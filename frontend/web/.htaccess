@@ -1,6 +1,26 @@
 Options +FollowSymLinks
 IndexIgnore */*
 
+Redirect 301 /listnews.html /news/novosti-kalligraf
+Redirect 301 /page35.html /main/missija-kalligrafa
+Redirect 301 /page21.html /news/istorija-«kalligrafa»
+Redirect 301 /page35.html /main/missija-kalligrafa
+Redirect 301 /page10.html /news/publikatsii-v-smi
+Redirect 301 /page12.html /main/video-audio-foto
+Redirect 301 /page13.html /news/otzyvy-klientov
+Redirect 301 /page17.html /news/chavo-otvety-na-chasto-zadavaemye-voprosy
+Redirect 301 /page18.html /main/sotrudnichestvo
+Redirect 301 /page19.html /main/ssylki
+Redirect 301 /page148.html /main/podderzhka-pocherka
+Redirect 301 /page40.html /main/anekdoty-ot-kalligrafa
+Redirect 301 /page46.html /main/skachat-besplatno
+Redirect 301 /page20.html /main/kontakty
+Redirect 301 /page9.html /main/puteshestvie-po-sajtu
+Redirect 301 /page77.html /pages/pravovaja-informatsija
+Redirect 301 /page90.html /pages/video-konsultatsija-v-kalligrafe
+Redirect 301 /page91.html /pages/video-otzyvy-roditelej
+Redirect 301 /page89.html /pages/video-znakomstvo-s-kalligrafom
+
 RewriteEngine on
 
 # if a directory or a file exists, use it directly

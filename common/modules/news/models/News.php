@@ -1,115 +1,58 @@
-<?
-
+<?php
 
 namespace common\modules\news\models;
-use yii\data\ActiveDataProvider;
 
-class News extends \yii\db\ActiveRecord
+
+use \common\components\UrlValidator;
+
+class News extends \common\components\ActiveRecord
 {
     public static function tableName()
     {
         return '{{%news}}';
     }
 
-    public function rules()
+    public function customRules()
     {
         return [
-            // the name, email, subject and body attributes are required
-            [['name', 'url', 'content'], 'required','message' => 'Это обязательное поле'],
-            [['name', 'url', 'image'], 'string', 'max' => 255],
+            [['name', 'url', 'content','image'], 'required'],
+            [['name', 'url','image'], 'string', 'max' => 255],
             [['content','description'], 'string', 'max' => 65535],
-            [['removed'], 'boolean'],
-            ['url', 'unique', 'message' => "Такой url уже существует."],
-            // the email attribute should be a valid email address
-            ['url', 'match', 'pattern' => '/^[a-zA-Z][a-zA-Z0-9-]{2,}$/i',
-                'message' => "Поле должно состоять из букв английского алфавита, цифр и знака минуса (-).
-                Поле должно начинаться только с буквы.
-                Поле должно быть не менее 3 символов."],
-            [['index',self::categoryField()], 'safe'],
-
+            //[['removed','deleted'], 'boolean'],
+            ['url', 'unique'],
+            ['category_id', 'exist' ,
+                'targetClass'=> static::getCategoryName(),
+                'targetAttribute' => 'id'],
+            ['url', UrlValidator::className() ],
         ];
     }
 
 
 
-    public static function search( $show_removed = null)
-    {
-
-    	$query = self::find();
-
-        if (isset($show_removed) && $show_removed)
-            $query = self::find()->where(['deleted' => true]);
-        else
-            $query = self::find()->where(['deleted' => false]);
-
-
-
-    	return  new ActiveDataProvider([
-		    'query' => $query,
-		    /*'pagination' => [
-		        'pageSize' => 10,
-		    ],*/
-		]);
-    }
-
-
-    public static function searchFrontend(  )
-    {
-
-        $query = self::find();
-
-        $query->andWhere( [ 'removed' => false] );
-        $query->andWhere( [ 'deleted' => false] );
-
-
-
-        return  new ActiveDataProvider([
-            'query' => $query,
-            /*'pagination' => [
-                'pageSize' => 10,
-            ],*/
-        ]);
-    }
-
-
-
-
-
-    
-
-
-    public function getCategory()
-    {
-        return $this->hasOne(self::className().'Category', ['id' => 'news_category_id']);
-    }
-
-    public function attributeLabels()
+    public static function table_chema( $migration )
     {
         return [
-            'id' => 'ID',
-            'name' => 'Название',
-            'url' => 'Ссылка',
-            'image' => 'Картинка',
-            'description' => 'Описание',
-            'content' => 'Содержание',
-            'index' => 'Порядковый номер',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата изменения',
-            'removed' => 'Скрыта',
-            'deleted' => 'Удалена',
-            self::categoryField() => 'Категория',
+
+            'id' => $migration->primaryKey()->unsigned(),
+            'name' => $migration->string(255)->notNull(),
+            'url' => $migration->string(255)->notNull(),
+            'image' => $migration->string(255)->notNull(),
+            'content' => $migration->longText()->notNull(),
+            'description' => $migration->longText(),
+            'category_id' => $migration->integer()->unsigned()->notNull(),
+
+
+            'created_at' => $migration->datetime()->notNull(),
+            'updated_at' => $migration->datetime()->notNull(),
+            'deleted_at' => $migration->datetime(),
+            'removed' => $migration->boolean()->notNull(),
+            'deleted' => $migration->boolean()->notNull(),
         ];
     }
 
-
-    public static function categoryField()
+    public function customLabels()
     {
-        return \Yii::$app->controller->module->id.'_category_id';
-    }
-
-    public static function categoryModelName()
-    {
-        return self::class.'Category';
+        return [];
     }
 
 }

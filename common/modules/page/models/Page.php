@@ -1,68 +1,50 @@
-<?
-
+<?php
 
 namespace common\modules\page\models;
-use yii\data\ActiveDataProvider;
 
-class Page extends \yii\db\ActiveRecord
+
+use \common\components\UrlValidator;
+
+class Page extends \common\components\ActiveRecord
 {
     public static function tableName()
     {
         return '{{%page}}';
     }
 
-    public function rules()
+    public function customRules()
     {
         return [
-            // the name, email, subject and body attributes are required
-            [['name', 'url', 'content'], 'required','message' => 'Это обязательное поле'],
+            [['name', 'url', 'content'], 'required'],
             [['name', 'url'], 'string', 'max' => 255],
             [['content'], 'string', 'max' => 65535],
             [['removed','deleted'], 'boolean'],
-            ['url', 'unique', 'message' => "Такой url уже существует."],
-            // the email attribute should be a valid email address
-            ['url', 'match', 'pattern' => '/^[a-zA-Z][a-zA-Z0-9-]{2,}$/i',
-                'message' => "Поле должно состоять из букв английского алфавита, цифр и знака минуса (-).
-                Поле должно начинаться только с буквы.
-                Поле должно быть не менее 3 символов."],
-
+            ['url', 'unique'],
+            ['url', UrlValidator::className() ],
         ];
     }
 
 
 
-    public static function search( $show_removed = null)
-    {
-
-    	$query = self::find();
-
-        if (isset($show_removed) && $show_removed)
-            $query = self::find()->where(['deleted' => true]);
-        else
-            $query = self::find()->where(['deleted' => false]);
-
-
-
-    	return  new ActiveDataProvider([
-		    'query' => $query,
-		    /*'pagination' => [
-		        'pageSize' => 10,
-		    ],*/
-		]);
-    }
-
-    public function attributeLabels()
+    public static function table_chema( $migration )
     {
         return [
-            'id' => 'ID',
-            'name' => 'Название',
-            'url' => 'Ссылка',
-            'content' => 'Содержание',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата изменения',
-            'removed' => 'Скрыта',
-            'deleted' => 'Удалена',
+
+            'id' => $migration->primaryKey()->unsigned(),
+            'name' => $migration->string(255)->notNull(),
+            'url' => $migration->string(255)->notNull(),
+            'content' => $migration->longText()->notNull(),
+            'created_at' => $migration->datetime()->notNull(),
+            'updated_at' => $migration->datetime()->notNull(),
+            'deleted_at' => $migration->datetime(),
+            'removed' => $migration->boolean()->notNull(),
+            'deleted' => $migration->boolean()->notNull(),
         ];
+    }
+
+    public function customLabels()
+    {
+        return [];
     }
 
 }

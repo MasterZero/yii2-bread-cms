@@ -1,4 +1,5 @@
 # yii console commands
+/yii
 /yii_test
 /yii_test.bat
 
@@ -18,12 +19,11 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
-/backend/web/assets/
-/frontend/web/assets/
+
+composer.lock
 
 # composer itself is not needed
 composer.phar
-composer.lock
 
 # Mac DS_Store Files
 .DS_Store

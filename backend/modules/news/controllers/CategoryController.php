@@ -1,7 +1,6 @@
-<?
+<?php
 namespace backend\modules\news\controllers;
 
-class CategoryController extends \backend\components\BackendCategoryController
+class CategoryController extends \common\components\DefaultController
 {
-
 }

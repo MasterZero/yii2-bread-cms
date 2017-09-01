@@ -3,7 +3,8 @@
 
 namespace common\components\actions;
 
-use \yii\db\Expression;
+
+use \yii\helpers\Url;
 
 class UpdateAction extends \yii\base\Action
 {
@@ -15,17 +16,8 @@ class UpdateAction extends \yii\base\Action
         if ($model->load(\Yii::$app->request->post()))
         {
 
-            if($model->isNewRecord)
-            {
-                $model->created_at = new Expression('NOW()');
-
-                $model->deleted = $model->removed = false;
-            }
-
-            $model->updated_at = new Expression('NOW()');
-
             if($model->save())
-                return $this->controller->redirect(['list']);
+                return $this->controller->redirect(  Url::to('list'));
         }
 
         return $this->controller->render('update', [

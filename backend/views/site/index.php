@@ -1,51 +1,54 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
+$this->title = 'Панель управления';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Добро пожаловать, <?= yii::$app->user->identity->name?>!</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Это панель управления. Сверху в меню можно выбрать модуль, который вы хотите редактировать. </p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+
+        <p><?= Html::a('Файловый менеджер',['elfinder'],['class' => 'btn btn-lg btn-success']); ?></p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Смена пароля</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Не забывайте регулярно менять пароль от панели управления. Это поможет избежать компрометацию пароля.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <p><a class="btn btn-default" href="/user/change">
+                    Поменять пароль &raquo;
+                </a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Документация</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Очень трудно разобраться? Ничего не понятно, а нужно что то поменять на сайте? Не беда! в данном месте собрана детальная инструкция с картиночками по использованию панели управления.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <p><a class="btn btn-default" href="/doc">Документация &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Выход</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>После окончания всех работ, пожалуйста, выходите из панели управления для предотвращения нессакционированного доступа.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                 <p>
+                    <?= Html::beginForm(['/site/logout'], 'post')?>
+                    <?= Html::submitButton(
+                        '<i class="fa fa-sign-out"></i> Выйти &raquo;',
+                        ['class' => 'btn btn-default logout',
+                        'title' => 'Выйти']
+                        );?>
+                    <?= Html::endForm() ?>
+                </p>
             </div>
         </div>
 
